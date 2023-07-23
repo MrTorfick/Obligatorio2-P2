@@ -1,0 +1,83 @@
+﻿@using Dominio;
+@model IEnumerable<Dominio.Agenda>
+
+
+<h1>Buscar Agendas de un Huesped</h1>
+
+<form method="post">
+    <label>Numero de documento</label><br />
+    <input type="number" name="nroDocumento" />
+    <select name="slcTipoDocumento">
+        <option value="1">CI</option>
+        <option value="2">Pasaporte</option>
+        <option value="3">Otros</option>
+    </select>
+    <input type="submit" value="Buscar" />
+</form>
+
+
+
+@ViewBag.msg
+@if (Model != null &&Model.Count()>0)
+{
+    <table class="table">
+
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Nombre de la actividad</th>
+            <th>Fecha de la actividad</th>
+            <th>Lugar de la actividad</th>
+            <th>Costo</th>
+            <th>Estado</th>
+            <th>Proveedor</th>
+            <th>Confirmar</th>
+        </tr>
+
+
+        @foreach (Agenda item in Model)
+        {
+            <tr>
+
+                <td>@item.Huesped.Nombre</td>
+                <td>@item.Huesped.Apellido</td>
+                <td>@item.Actividad.Nombre</td>
+                <td>@item.Actividad.Fecha</td>
+                @if (item.Actividad.GetTipo() == "Hostal")
+                {
+
+                    <td>@item.Actividad.ObtenerLugar()</td>
+                }
+                else
+                {
+                    <td>-</td>
+                }
+                @if (item.Costo > 0)
+                {
+                    <td>@item.Costo</td>
+                }
+                else
+                {
+                    <td>Actividad gratuita</td>
+                }
+                <td>@item.EstadoAgenda</td>
+
+                @if (item.Actividad.GetTipo() == "Tercerizada")
+                {
+                    <td>@item.Actividad.ObtenerNombreProveedor()</td>
+                }
+                else
+                {
+                    <td>-</td>
+                }
+
+                @if (item.EstadoAgenda == EstadoAgenda.PendientePago)
+                {
+                    <td>@Html.ActionLink("Confirmar Agenda", "Edit", "Agenda", new {id = item.Id})</td>
+                }
+
+            </tr>
+        }
+
+    </table>
+}

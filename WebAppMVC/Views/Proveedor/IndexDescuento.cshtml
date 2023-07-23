@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Dominio;
+@model IEnumerable<Dominio.Proveedor>
+
+<h1>@ViewBag.Operador.Email</h1>
+
+
+<table class="table">
+
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Numero de contacto</th>
+        <th>Direccion</th>
+        <th>Descuento</th>
+    </tr>
+
+
+    @foreach (Proveedor item in Model)
+    {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Nombre</td>
+                <td>@item.NumeroContacto</td>
+                <td>@item.Direccion</td>
+                <td>@item.Descuento%</td>
+            </tr>
+    }
+
+</table>

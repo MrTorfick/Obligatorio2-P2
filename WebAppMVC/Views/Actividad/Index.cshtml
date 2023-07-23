@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Dominio;
+@model IEnumerable<Dominio.Actividad>
+
+<h1>Lista de actividades</h1>
+
+
+<table class="table">
+
+    <tr>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Fecha</th>
+        <th>Costo</th>
+        <th>Agendar</th>
+    </tr>
+
+    @foreach (Actividad item in Model)
+    {
+
+        <tr>
+            @if (item.Fecha.ToString("d") == DateTime.Now.ToString("d"))
+            {
+                ViewBag.flag = true;
+                <td>@item.Nombre</td>
+                <td>@item.Descripcion</td>
+                <td>@item.Fecha.ToString("d")</td>
+                <td>@item.Costo</td>
+
+                @if (Context.Session.GetInt32("LogueadoID") == null)
+                {
+                    <td>@Html.ActionLink("Agendarse", "Login", "Home")</td>
+                }
+                else if (Context.Session.GetString("LogueadoRol") == "Huesped")
+                {
+                    <td>@Html.ActionLink("Agendarse", "Create", "Agenda", new {id = item.Id})</td>
+                }
+                else
+                {
+                    <td>-</td>
+                }
+            }
+
+        </tr>
+    }
+    @if (ViewBag.flag == false)
+    {
+        @ViewBag.msg
+
+    }
+</table>

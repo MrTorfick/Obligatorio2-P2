@@ -1,0 +1,25 @@
+﻿@using Dominio
+@model Dominio.Proveedor
+
+<h1>Establecer promocion del proveedor</h1>
+
+
+@if (Model != null)
+{
+
+    <form method="post">
+
+        <input type="hidden" asp-for="Id">
+        <input type="hidden" asp-for="Nombre">
+        <label>Descuento:</label>
+        <br />
+        <input type="number" asp-for="Descuento" />
+        <br />
+        <label>Confirmar promocion</label>
+        <input type="checkbox" name="Check" value="true" />
+        <br />
+        <input type="submit" value="Aceptar" />
+    </form>
+
+}
+@ViewBag.msg

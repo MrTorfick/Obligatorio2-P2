@@ -1,0 +1,27 @@
+﻿@using Dominio;
+@model Dominio.Operador;
+
+
+<h1>Datos personales</h1>
+
+
+<table class="table">
+
+    <tr>
+        <th>Email</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Fecha comienzo</th>
+
+    </tr>
+
+    <tr>
+
+        <td>@Model.Email</td>
+        <td>@Model.Nombre</td>
+        <td>@Model.Apellido</td>
+        <td>@Model.FechaTrabajo.ToString("d")</td>
+
+    </tr>
+
+</table>

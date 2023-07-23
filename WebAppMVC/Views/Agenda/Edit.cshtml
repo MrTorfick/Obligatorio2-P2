@@ -1,0 +1,40 @@
+﻿@using Dominio
+@model Dominio.Agenda
+
+<h1>Confirmar Agenda</h1>
+
+@if (Model != null)
+{
+
+
+    <br />
+    <label>Nombre Huesped:</label>
+    <br />
+    <input value="@Model.Huesped.Nombre" readonly />
+    <br />
+
+    <label>Nombre de la Actividad:</label>
+    <br />
+    <input value="@Model.Actividad.Nombre" readonly />
+    <br />
+
+    <label>Estado actual</label>
+    <br />
+    <input value="@Model.EstadoAgenda" readonly />
+    <br />
+
+
+    <br />
+    <form method="post">
+
+        <input value="@Model.Id" name="idAgenda" hidden />
+        <label>Confirmar Agenda</label>
+        <input type="checkbox" name="Check" value="true" />
+        <br />
+        <input type="submit" value="Aceptar" />
+    </form>
+}
+@ViewBag.msg
+
+
+

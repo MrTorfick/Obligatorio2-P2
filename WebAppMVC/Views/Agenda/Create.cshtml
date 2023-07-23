@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Dominio
+@model Dominio.Agenda
+
+<h1>Confirmar Actividad</h1>
+
+@if (ViewBag.Huesped != null && ViewBag.Actividad != null)
+{
+
+
+    <br />
+    <label>Nombre:</label>
+    <br />
+    <input value="@ViewBag.Huesped.Nombre" readonly />
+    <br />
+
+    <label>Apellido:</label>
+    <br />
+    <input value="@ViewBag.Huesped.Apellido" readonly />
+    <br />
+
+    <label>Fecha de la actividad</label>
+    <br />
+    <input value="@ViewBag.Actividad.Fecha" readonly />
+    <br />
+    @if (ViewBag.Actividad.GetTipo() == "Hostal")
+    {
+        <label>Lugar:</label>
+        <br />
+        <input value="@ViewBag.Actividad.Nombre" readonly />
+
+        <br />
+    }
+    <label>Costo</label>
+    <br />
+    @if (ViewBag.Actividad.Costo == 0)
+    {
+        <input value="Actividad gratuita" readonly />
+
+        <br />
+        <label>Estado Agenda</label>
+
+        <br />
+        <input value="Confirmada" readonly />
+
+        <br />
+    }
+    else
+    {
+        <input value="@ViewBag.Actividad.Costo" readonly />
+
+        <br />
+        <label>Estado Agenda</label>
+
+        <br />
+        <input value="Pendiente_Pago" readonly />
+
+        <br />
+    }
+    @if (ViewBag.Actividad.GetTipo() == "Tercerizada")
+    {
+        <label>Nombre proveedor</label>
+
+        <br />
+        <input value="@ViewBag.Actividad.ObtenerNombreProveedor()" readonly />
+
+        <br />
+
+    }
+
+    <form method="post">
+        <input name="idActividad" value="@ViewBag.Actividad.Id" hidden />
+        <label>Confirmar Actividad</label>
+        <input type="checkbox" name="Check" value="true" />
+        <br />
+        <input type="submit" value="Aceptar" />
+    </form>
+}
+@ViewBag.msg
+
+
+
+

@@ -1,0 +1,53 @@
+﻿@using Dominio;
+@model IEnumerable<Dominio.Actividad>
+
+
+<h1>Buscar actividad para una fecha dada</h1>
+
+<form method="post">
+    <input type="date" name="fechaBuscar" /><br />
+    <input type="submit" value="Buscar" />
+</form>
+
+
+@if (Model != null && Model.Count() > 0)
+{
+
+    <table class="table">
+
+        <tr>
+            <th>Nombre</th>
+            <th>Descripcion</th>
+            <th>Fecha</th>
+            <th>Costo</th>
+            <th>Agendar</th>
+        </tr>
+
+
+        @foreach (Actividad item in Model)
+        {
+            <tr>
+                <td>@item.Nombre</td>
+                <td>@item.Descripcion</td>
+                <td>@item.Fecha.ToString("d")</td>
+                <td>@item.Costo</td>
+
+                @if (Context.Session.GetInt32("LogueadoID") == null)
+                {
+                    <td>@Html.ActionLink("Agendarse", "Login", "Home")</td>
+                }
+                else if (Context.Session.GetString("LogueadoRol") == "Huesped")
+                {
+                    <td>@Html.ActionLink("Agendarse", "Create", "Agenda", new {id = item.Id})</td>
+                }
+                else
+                {
+                    <td>-</td>
+                }
+            </tr>
+        }
+
+    </table>
+
+}
+@ViewBag.msg

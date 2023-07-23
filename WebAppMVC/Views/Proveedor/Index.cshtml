@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Dominio;
+@model IEnumerable<Dominio.Proveedor>
+
+<h1>Lista de proveedores</h1>
+
+
+<table class="table">
+
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Numero de contacto</th>
+        <th>Direccion</th>
+        <th>Descuento</th>
+    </tr>
+
+
+    @foreach (Proveedor item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Nombre</td>
+            <td>@item.NumeroContacto</td>
+            <td>@item.Direccion</td>
+            <td>@item.Descuento%</td>
+
+            <td>@Html.ActionLink("Establecer porcentaje de descuento", "Edit", "Proveedor", new {id = item.Id})</td>
+
+        </tr>
+    }
+
+</table>

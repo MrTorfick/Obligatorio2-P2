@@ -1,0 +1,48 @@
+﻿@model Dominio.Huesped
+
+<h1>Registrarse como Huesped</h1>
+
+<form method="post">
+
+
+    <label>Email:</label><br />
+    <input type="email" asp-for="Email" />
+    <br />
+
+    <label>Contraseña:</label><br />
+    <input type="password" asp-for="Contrasenia" />
+    <br />
+
+    <label>Numero de documento:</label><br />
+    <input type="number" asp-for="NumeroDocumento" />
+    <br />
+
+    <select name="slcTipoDocumento">
+        <option value="1">CI</option>
+        <option value="2">Pasaporte</option>
+        <option value="3">Otros</option>
+    </select>
+    <br />
+
+    <label>Nombre:</label><br />
+    <input type="text" asp-for="Nombre" />
+    <br />
+
+    <label>Apellido</label><br />
+    <input type="text" asp-for="Apellido" />
+    <br />
+
+    <label>Habitacion</label><br />
+    <input type="text" asp-for="Habitacion" />
+    <br />
+
+    <label>Edad</label><br />
+    <input type="number" asp-for="Edad" />
+    <br />
+
+    <label>Fecha de nacimiento</label><br />
+    <input type="date" asp-for="FechaNacimiento" />
+    <br />
+    <input type="submit" value="Aceptar" />
+</form>
+@ViewBag.msg
